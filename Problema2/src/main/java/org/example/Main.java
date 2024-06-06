@@ -15,6 +15,16 @@ public class Main {
         for(int i =0; i< PRODUCE_COUNT;i++){
             deque.add((int) (Math.random() * 1000));
         }
+        ArrayList<Consumer> consumers = new ArrayList<>();
+        for (int i = 0; i < CONSUMER_COUNT; i++) {
+            consumers.add(new Consumer());
+        }
+        ArrayList<Thread> consumerThreads = new ArrayList<>();
+        for (Consumer consumer : consumers) {
+            Thread consumerThread = new Thread(consumer);
+            consumerThreads.add(consumerThread);
+            consumerThread.start();
+        }
         for (Integer d: deque) {
             System.out.println(d);
         }
@@ -47,7 +57,7 @@ public class Main {
             this.enteros = new ArrayList<>();
         }
         public void run() {
-            
+            System.out.println(suma());
         }
         private int suma(){
             int sum = 0;
